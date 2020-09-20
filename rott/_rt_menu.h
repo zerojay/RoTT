@@ -216,21 +216,13 @@ static byte ExtScanCodes[] = // Scan codes with >1 char names
 };
 
 static byte *ExtScanNames[] = // Names corresponding to ExtScanCodes
-#ifdef _GCW_
-{
-   "Start","R","L","A","X","?","?","?","?","?",
-   "?","?","?","?","?","?","?","?","?","Select","Y",
-   "?","B","?","?","?","?","?","?","?","Up",
-   "Down","Left","Right",""
-};
-#else
 {
    "Esc","BkSp","Tab","Ctrl","Space","CapLk","F1","F2","F3","F4",
    "F5","F6","F7","F8","F9","F10","F11","F12","SclLk","Enter","Shift",
    "PrtSc","Alt","Home","PgUp","End","PgDn","Ins","Del","NumLk","Up",
    "Down","Left","Right",""
 };
-#endif
+
 
 
 //******************************************************************************
