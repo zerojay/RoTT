@@ -182,36 +182,6 @@ boolean RefreshPause = true;
 
 boolean  buttonpoll[NUMBUTTONS];
 
-#ifdef _GCW_
-int      buttonscan[NUMBUTTONS] = {
-		sc_Control,			//Fire
-		sc_Alt,     		//Strafe
-		sc_RShift,			//Run
-		sc_Space,				//Action
-		sc_PgUp,				//Fly Up
-		sc_PgDn,				//Fly Down
-		sc_Tab,				//Toggle Weapon
-		sc_Delete,			//Drop Weapon
-		sc_Home,				//Aim Up
-		sc_End,					//Aim Down
-		sc_1,						//I would imagine this chunk
-		sc_2,
-		sc_3,
-		sc_4,						//Is for switching guns, amirite?
-		sc_CapsLock,    //Autorun
-		sc_F12,					//damn dude boss is here hide it
-		sc_Comma,				//Strafe left
-		sc_Period,			//Strafe right
-		sc_BackSpace,		//Volte-face (turn around)
-		sc_A,						//A for Aim
-		sc_UpArrow,			//Directional
-		sc_RightArrow,
-		sc_DownArrow,
-		sc_LeftArrow,   //Pad, pretty obvious
-		sc_Return,					//Map View
-		sc_T,						//Send Message
-		sc_Z };					//Direct Message
-#else
 int      buttonscan[NUMBUTTONS] = {
 		sc_Control,			//Fire
 		sc_Alt,     		//Strafe
@@ -240,7 +210,6 @@ int      buttonscan[NUMBUTTONS] = {
 		sc_Tab,					//Map View
 		sc_T,						//Send Message
 		sc_Z };					//Direct Message
-#endif
 
 int      joyxmax = 0, joyymax = 0, joyxmin = 0, joyymin = 0;
 
@@ -254,11 +223,7 @@ int      buttonjoy[16] = {
 		bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton
 };
 
-#ifdef _GCW_
-int			 axisjoy[8] = { ax_turn, ax_move, ax_ignore, ax_turn, ax_lookver, ax_ignore };
-#else
 int			 axisjoy[8] = { ax_move, ax_strafe, ax_ignore, ax_turn, ax_lookver, ax_ignore };
-#endif
 
 williamdidthis FREE = {84,5,0,0,9,{{done,2,1},{done,2,2},{done,2,3},
   {done,2,4},{done,2,5},{done,2,6},{done,2,7},{done,2,8},
