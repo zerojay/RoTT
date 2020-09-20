@@ -92,7 +92,7 @@ void W_AddFile (char *_filename)
         char buf[MAX_PATH+100];//bna++
 
 #if (SHAREWARE==0) && (USEHOMEPATH==1)
-        snprintf(filename, MAX_PATH, "%s/.rott/%s", getenv("HOME"), _filename);
+        snprintf(filename, MAX_PATH, "%s/RetroPie/roms/ports/rott/%s", getenv("HOME"), _filename);
 
         filename[sizeof (filename) - 1] = '\0';
         FixFilePath(filename);
