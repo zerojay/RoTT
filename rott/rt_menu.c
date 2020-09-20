@@ -428,7 +428,7 @@ CP_MenuNames CtlMenuNames[] =
    "SPACEBALL ENABLED",
    "CYBERMAN ENABLED",
    "ADJUST THRESHOLD",
-   "ADJUST SENSITIVITY",
+   "MOUSE SENSITIVITY",
    "CUSTOMIZE CONTROLS"
    };
 
@@ -3053,7 +3053,7 @@ boolean CP_DisplayMsg
          CP_Acknowledge = CP_ESC;
          MN_PlayMenuSnd( SD_ESCPRESSEDSND );
          }
-      else if ( ( Keyboard[ sc_Control ] || Keyboard[ sc_Enter ] ||
+      else if ( ( Keyboard[ sc_Space ] || Keyboard[ sc_Enter ] ||
          ci.button0 ) && !YESON )
          {
          done   = true;
@@ -5189,11 +5189,7 @@ byte * IN_GetScanName (ScanCode scan)
          return (*p);
 
 
-#ifdef _GCW_
-   return(ExtScanNames[7]);
-#else
    return(ScanNames[scan]);
-#endif
 }
 
 
