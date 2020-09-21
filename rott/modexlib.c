@@ -43,7 +43,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 static void StretchMemPicture ();
 // GLOBAL VARIABLES
 
-boolean StretchScreen=0;//bn�++
+boolean StretchScreen=0;//bná++
 extern boolean iG_aimCross;
 extern boolean sdl_fullscreen;
 extern int iG_X_center;
@@ -420,12 +420,11 @@ void XFlipPage ( void )
 */
 static SDL_Surface *sdl_surface = NULL;
 static SDL_Surface *unstretch_sdl_surface = NULL;
-static SDL_Surface *stretch_sdl_surface = NULL;
-static byte stretching=0;
+
 
 void GraphicsMode ( void )
 {
-    Uint32 flags = SDL_SWSURFACE | SDL_DOUBLEBUF;
+    Uint32 flags = 0;
 
 	if (SDL_InitSubSystem (SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
@@ -442,15 +441,8 @@ void GraphicsMode ( void )
     SDL_ShowCursor (0);
 //    sdl_surface = SDL_SetVideoMode (320, 200, 8, flags);
     if (sdl_fullscreen)
-        flags |= SDL_FULLSCREEN;
-    if (iGLOBAL_SCREENWIDTH == 320) {
-    		sdl_surface         = SDL_CreateRGBSurface(flags, 320, 200, 8, 0, 0, 0, 0);
-    		stretch_sdl_surface = SDL_SetVideoMode    (       320, 240, 8, flags);
-
-    		stretching = 1;
-    }
-    else
-    	sdl_surface = SDL_SetVideoMode (iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, 8, flags);
+        flags = SDL_FULLSCREEN;
+    sdl_surface = SDL_SetVideoMode (iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, 8, flags);
 
 	if (sdl_surface == NULL)
 	{
@@ -676,7 +668,7 @@ void VL_ClearVideo (byte color)
   VGAMAPMASK(15);
   memset((byte *)(0xa000<<4),color,0x10000);
 #else
-  memset (sdl_surface->pixels, color, sdl_surface->w*sdl_surface->h);
+  memset (sdl_surface->pixels, color, iGLOBAL_SCREENWIDTH*iGLOBAL_SCREENHEIGHT);
 #endif
 }
 
@@ -715,24 +707,6 @@ void VH_UpdateScreen (void)
 =================
 */
 
-void SDL_StretchIt()
-{
-	Uint8 *src;
-	Uint8 *dest;
-
-	int i;
-	for (i=0;i<39;i++)
-		{
-			src  = sdl_surface->pixels + (i*5)*sdl_surface->pitch;
-			dest = stretch_sdl_surface->pixels + (i*6)*stretch_sdl_surface->pitch;
-			memcpy(dest, src, sdl_surface->pitch*6);
-		}
-
-	src  = sdl_surface->pixels + (39*5)*sdl_surface->pitch;
-	dest = stretch_sdl_surface->pixels + (39*6)*stretch_sdl_surface->pitch;
-	memcpy(dest, src, sdl_surface->pitch*5);
-}
-
 void XFlipPage ( void )
 {
 #ifdef DOS
@@ -754,14 +728,7 @@ void XFlipPage ( void )
 	}else{
 		DrawCenterAim ();
 	}
- 	 if (stretching) {
- 		 //SDL_BlitSurface(sdl_surface, NULL, stretch_sdl_surface, NULL);
- 		 //stretch_sdl_surface->pixels = sdl_surface->pixels;
- 		 SDL_StretchIt();
- 		 SDL_Flip(stretch_sdl_surface);
- 	 }
- 	 else
- 		 SDL_UpdateRect (sdl_surface, 0, 0, 0, 0);
+    SDL_UpdateRect (sdl_surface, 0, 0, 0, 0);
  
 #endif
 }
