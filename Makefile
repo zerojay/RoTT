@@ -7,7 +7,7 @@ all: $(ROTTS)
 # Shareware Version
 rott-huntbgin:
 	$(MAKE) -C $(SRCDIR) tidy
-	$(MAKE) -C $(SRCDIR) ROTT=$@
+	$(MAKE) -C $(SRCDIR) ROTT=$@ SHAREWARE=1
 	mv $(SRCDIR)/$@ .
 
 # Commercial Version
