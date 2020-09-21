@@ -16,7 +16,7 @@ ROTT ?= rott
 
 CC ?= gcc
 
-CFLAGS ?= -g -O0
+CFLAGS ?= -g -O2
 CFLAGS += -Wall -Wno-unused
 CFLAGS += $(shell sdl-config --cflags)
 CFLAGS += $(EXTRACFLAGS)
